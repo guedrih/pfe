@@ -1,0 +1,69 @@
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="background-color: rgb(247,247,247);height: 80px;">
+  <div class="container-fluid" style="padding: 8.333333%">
+        <a [routerLink]="['/']"><img src="assets/img/logo.png" ></a>
+    <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navcol-1">
+      <ul class="nav navbar-nav mr-auto">
+        <li class="nav-item" role="presentation"></li>
+        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">La gestion</a>
+          <div class="dropdown-menu" role="menu">
+            <a class="dropdown-item" role="presentation" [routerLink]="['/management/users']"><i class="fa fa-users" aria-hidden="true"></i> Les clients</a>
+            <a class="dropdown-item" role="presentation" [routerLink]="['/management/products']"><i class="fa fa-archive" aria-hidden="true"></i> Stocks</a>
+            <a class="dropdown-item" role="presentation" [routerLink]="['/management/orders']"><i class="fa fa-truck" aria-hidden="true"></i> Ordres</a>
+          </div>
+        </li>
+      </ul>
+      <ng-container *ngIf="getloggedInUser()">
+        <span class="navbar-text actions list-unstyled">
+          <ul class="nav navbar-nav ml-auto">
+              <li class="nav-item" role="presentation"></li>
+
+              <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>
+                {{getloggedInUser().email}}
+                <span class="caret"></span></a>
+                <div class="dropdown-menu" role="menu">
+                  <button class="dropdown-item" [routerLink]="['/user/orders']"><i class="fa fa-truck" aria-hidden="true"></i> Mes commandes</button>
+                  <button class="dropdown-item" (click)="logout()" [routerLink]="['/']"><i class="fa fa-sign-out" aria-hidden="true" ></i> Se déconnecter</button>
+                </div>
+              </li>
+          </ul>
+      </span>
+      </ng-container>
+      <ng-container *ngIf="!getloggedInUser()">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">	<a class="dropdown-toggle-user nav-link" data-toggle="dropdown" role="button" href="#" style="border-right: 1px solid #c6c6c6;">
+            Login
+          </a>
+            <div class="dropdown-menu dropdown-menu-right" id="formLogin">
+              <div class="form-group">
+                <label class="">EMail</label>
+                <input class="form-control" type="email" [(ngModel)]="userEmail" name="{{userEmail}}" />
+              </div>
+              <button type="submit" id="btnLogin" class="btn btn-login btn-sm" (click)="login(userEmail)" [routerLink]="['/']">login</button>
+            </div>
+          </li>
+          <li class="dropdown">	<a class="dropdown-toggle-user nav-link" data-toggle="dropdown" role="button" href="#">
+            S'inscrire
+          </a>
+            <div class="dropdown-menu dropdown-menu-right" id="formRegister">
+              <div class="form-group">
+                <label class="">Nom</label>
+                <input class="form-control" type="text" [(ngModel)]="registerName" name="{{registerName}}" />
+              </div>
+              <div class="form-group">
+                <label class="">Nom de famille</label>
+                <input class="form-control" type="text" [(ngModel)]="registerSurname" name="{{registerSurname}}" />
+              </div>
+              <div class="form-group">
+                <label class="">EMail</label>
+                <input class="form-control" type="email" [(ngModel)]="registerEmail" name="{{registerEmail}}" />
+              </div>
+              <button type="submit" class="btn btn-register btn-sm" (click)="register(registerName, registerSurname, registerEmail)" [routerLink]="['/']">S'inscrire</button>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+
+    </div>
+  </div>
+</nav>

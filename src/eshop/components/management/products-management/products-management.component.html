@@ -1,0 +1,62 @@
+<div class="product-list">
+  <div class="container-fluid" style="padding: 0 8.333333%;">
+    <h1 style="text-align: center;">Gestion de l'inventaire</h1>
+    <hr>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Image</th>
+        <th>Prix</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of products  | async">
+        <td>
+          <label style="display: block;">
+            <input [(ngModel)]="product.title" class="form-control" type="text" name="{{product.title}}" />
+          </label>
+        </td>
+        <td>
+          <label>
+            <input [(ngModel)]="product.image" class="form-control" type="text" name="{{product.image}}" />
+          </label>
+        </td>
+        <td>
+          <label>
+            <input [(ngModel)]="product.price" class="form-control" type="number" step="any" name="{{product.price}}" />
+          </label>
+        </td>
+        <td>
+          <label>
+            <input [(ngModel)]="product.quantity" class="form-control" type="number" name="{{product.quantity}}" />
+          </label>
+        </td>
+        <td>
+          <button style="margin: 2px 5px" class="btn btn-save"  type="button" (click)="editProduct(product)"><i class="fa fa-floppy-o" aria-hidden="true"></i> Sauvegarder</button>
+          <button style="margin: 2px 5px" class="btn btn-remove"  type="button" (click)="deleteProduct(product.id)"><i class="fa fa-trash" aria-hidden="true"></i> Effacement</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input class="form-control" type="text" [(ngModel)]="newProduct.title" name="{{newProduct.title}}" />
+        </td>
+        <td>
+          <input class="form-control" type="image" [(ngModel)]="newProduct.image" name="{{newProduct.image}}" />
+        </td>
+        <td>
+          <input class="form-control" type="text" [(ngModel)]="newProduct.price" name="{{newProduct.price}}" />
+        </td>
+        <td>
+          <input class="form-control" type="text" [(ngModel)]="newProduct.quantity" name="{{newProduct.quantity}}" />
+        </td>
+        <td>
+          <button style="margin: 0 5px" class="btn btn-add" type="button" (click)="createProduct(newProduct)"><i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter produit</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+ </div>

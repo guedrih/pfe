@@ -1,0 +1,25 @@
+<div class="row" style="margin: auto">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-8" style="margin-top: 52px">
+    <select class="custom-select" style="width: auto; height: 35px;" (change)="setSort($event.target.value)">
+      <option value="default" selected >Trier (série)</option>
+      <option value="asc">Ascendant</option>
+      <option value="desc">Descendant</option>
+    </select>
+    <select class="custom-select" style="width: auto; height: 35px;margin-left: 15px" (change)="setCount($event.target.value)">
+      <option selected value="50">Apparence (produits)</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
+    <div class="row product-list">
+        <ng-container *ngFor="let product of products | async | sort: sortBool:sortAsc | slice: 0:countNum">
+          <div app-product [product]="product" class="col-sm-6 col-md-4 product-item"></div>
+        </ng-container>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <app-cart></app-cart>
+  </div>
+  <div class="col-sm-1"></div>
+</div>

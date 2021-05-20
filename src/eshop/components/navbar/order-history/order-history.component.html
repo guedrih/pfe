@@ -1,0 +1,51 @@
+<div class="container-fluid" style="padding: 0 8.333333%;">
+  <div><h1 style="margin-top: 50px;text-align: center">Historique des commandes</h1></div>
+  <hr style="margin-top: 5px; margin-bottom: 0px;">
+  <br>
+  <div class="row">
+    <div class="col-md-8" style="margin: auto; width: 60%;">
+      <ng-container *ngIf="orders.length; else NoOrders">
+        <ng-container *ngFor="let order of orders">
+          <div class="panel">
+            <div class="panel-body" style="padding: 10px;">
+              <ng-container *ngFor="let item of order.orderProducts ">
+                <li class="list-group-item history_items">
+                  <span class="badge" style="background-color: #555; float: right;color: white;border-radius: 10px;margin-top: 3px;">{{item.product.price * item.quantity  | currency: ' '}}</span>
+                  <b>{{ item.quantity }}x</b> {{ item.product.title }}
+                </li>
+              </ng-container>
+              <ng-container *ngIf="order.posted; else notPosted">
+                <div style="float: right; margin: 10px">
+                  Statut: envoyé
+                </div>
+              </ng-container>
+              <ng-template #notPosted>
+                <div style="float: right; margin: 10px">
+                  Statut: en cours
+                </div>
+              </ng-template>
+              <br>
+            </div>
+            <ng-container *ngIf="order.posted; else total_notPosted">
+            <div class="panel-footer history_total_posted" style="text-align: center">
+              <b>Le total: {{order.price_total}} Dt</b>
+            </div>
+            </ng-container>
+            <ng-template #total_notPosted>
+              <div class="panel-footer history_total_notposted" style="text-align: center">
+                <b>Le total: {{order.price_total}} Dt</b>
+              </div>
+            </ng-template>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-template #NoOrders>
+        <div class="panel panel-default" style="padding: 10px;">
+          <img src="https://i.giphy.com/media/xUOxeRSgzGd7rbAqWs/giphy.webp"><br><br>
+          Vous n'avez pas encore commandé? Qu'est-ce que tu attends!<br><br>
+          <button routerLink="/" type="button" class="btn btn-add">Retour au catalogue</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

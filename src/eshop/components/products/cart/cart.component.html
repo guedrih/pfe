@@ -1,0 +1,45 @@
+<div class="cart">
+  <div>
+    <h4>
+      <br>
+      <span class="text-muted" style="margin-bottom: 0">Panier </span>
+      <span style="margin-bottom: 3px;" class="badge badge-secondary badge-pill">{{itemCount}}</span>
+    </h4>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <ul class="list-group" style="margin-top: -3px;">
+
+
+        <ng-container *ngFor="let item of (cart | async).items">
+                <li class="list-group-item d-flex justify-content-between lh-condensed" style="border-radius: 0">
+                    <div class="col-sm-10" >
+                      <h5><b>{{item.product.title}}</b></h5>
+                      <div class="text-muted" style="padding-top: 8px">{{item.product.price * item.quantity}} Dt</div>
+                    </div>
+                    <div class="col-sm-2" style="padding-left: 0px">
+                      <a (click)="removeProduct(item.product)" class="cartItemClose">&times;</a>
+                      <b>({{item.quantity}})</b>
+                    </div>
+                </li>
+        </ng-container>
+
+        <li class="list-group-item d-flex justify-content-between" style="flex-wrap: wrap;">
+          <span style="margin: auto;">Total: <strong>{{(cart | async).priceTotal}} Dt</strong></span>
+
+          <ng-container *ngIf="getCurrentUser(); else notSignedIn">
+            <button style="margin: auto;" [attr.disabled]="itemCount === 0 ? true : null" type="button" class="btn btn-add btn-responsive" routerLink="/checkout">Commander</button>
+          </ng-container>
+
+          <ng-template #notSignedIn>
+            <button style="margin: auto;" [attr.disabled]="true" type="button" class="btn btn-add btn-responsive" routerLink="/checkout">Commander</button>
+            <div style="text-align: center; color: red;">
+              <hr>
+              <strong>Vous devez d'abord vous connecter pour continuer!</strong>
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

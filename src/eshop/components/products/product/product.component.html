@@ -1,0 +1,24 @@
+  <div class="product-container">
+    <div class="row">
+      <div class="col-md-12"><a class="product-image"><img [src]="product.image"></a></div>
+    </div>
+    <div class="row" style="height: 30px">
+      <div class="col-md-10">
+        <h2><a>{{product.title}}</a></h2>
+		</div>
+		<div class="col-md-14">
+        <h2><a> En stock : {{product.quantity}}</a></h2>
+		</div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <hr>
+        <div class="row">
+          <div class="col-md-6"><button class="btn btn-add" type="button" (click)="addProductToCart(product)">Ajouter au panier</button></div>
+          <div class="col-md-6">
+            <p class="product-price">{{product.price}} Dt</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

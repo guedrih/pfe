@@ -1,0 +1,82 @@
+<div class="container">
+  <br>
+  <div><h1 style="margin-bottom: 0; text-align: center;">Ordre</h1></div>
+  <hr style="margin-top: 5px; margin-bottom: 0px;">
+  <div class="row">
+    <div class="col-md-4">
+      <h4>
+        <br>
+        <span class="text-muted" style="margin-bottom: 0">Panier </span>
+        <span style="margin-bottom: 3px;" class="badge badge-secondary badge-pill">{{itemCount}}</span>
+      </h4>
+      <ul class="list-group">
+
+        <ng-container *ngFor="let item of (cart | async).items">
+          <li class="list-group-item d-flex justify-content-between lh-condensed" style="border-radius: 0">
+            <div class="col-sm-11">
+              <h5><b>{{item.product.title}} ({{item.quantity}})</b></h5>
+              <span class="text-muted">{{item.product.price * item.quantity}} Dt</span>
+            </div>
+            <div class="col-sm-1" style="padding-left: 0px">
+              <a (click)="removeProduct(item.product)" class="cartItemClose">&times;</a>
+            </div>
+          </li>
+        </ng-container>
+
+        <li class="list-group-item d-flex justify-content-between" style="border-radius: 0">
+          <span>Le total: </span>
+          <strong>{{(cart | async).priceTotal}} Dt</strong>
+        </li>
+      </ul>
+      <hr>
+        <button routerLink="/" type="button" class="btn btn-add">Retour au catalogue</button>
+    </div>
+    <div class="col-md-8">
+      <br>
+      <h4 style="margin-bottom: 18px">détail de livraison</h4>
+
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)" style="border: 1px solid rgba(0,0,0,.125)">
+        <div class="row" style="padding: 15px">
+          <div class="col-md-6">
+            <label class="form_margin" for="name">
+              Nom
+            </label>
+            <input class="form-control" id="name" type="text" formControlName="name" placeholder="Nom" required>
+          </div>
+        <div class="col-md-6">
+          <label class="form_margin" for="surname">
+            Nom de famille
+          </label>
+          <input class="form-control" id="surname" type="text" formControlName="surname" placeholder="Nom de famille" required>
+        </div>
+        </div>
+        <div class="row" style="padding: 15px">
+          <div class="col-md-6">
+            <label class="form_margin" for="email">
+              EMail
+            </label>
+            <input class="form-control" id="email" type="text" formControlName="email" placeholder="EMail" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form_margin" for="phone">
+              Téléphone
+            </label>
+            <input class="form-control" id="phone" type="text" formControlName="phone" placeholder="Téléphone" required>
+          </div>
+        </div>
+        <br>
+        <div class="col-md-12 form-group">
+          <label class="form_margin" for="address">
+            Adresse de livraison
+          </label>
+          <input class="form-control" id="address" type="text" formControlName="address" placeholder="adresse de rue" required>
+        </div>
+        <br>
+        <button class="btn btn-success btn-lg btn-block btn-add" style="padding: 15px" type="submit">Vérifier</button>
+      </form>
+
+    </div>
+
+  </div>
+  <br>
+</div>
